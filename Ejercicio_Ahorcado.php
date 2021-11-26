@@ -16,29 +16,29 @@ El programa pedirá una palabra en español y dará la correspondiente traducci�
 </head>
 <body>
     <?php
-        $palabraES = $_POST['palabraES'];
-        $traducciones = array ("ordenador", "nosotros", "esternocleidomastoideo", "noche", "dar", "porque", "nuevo", "camino", "bebe", "ahora", "tiempo", "cuando", "ir", "deporte", "cohete", "fuego", "rojo", "pato", "zorro", "baloncesto", "hacer", "jugar");
-        $generacionPalabra = $traducciones[rand(0,21)];
+        $palabraUsuario = $_POST['palabraUsuario'];
+        $listaPalabras = array ("ordenador", "nosotros", "esternocleidomastoideo", "noche", "dar", "porque", "nuevo", "camino", "bebe", "ahora", "tiempo", "cuando", "ir", "deporte", "cohete", "fuego", "rojo", "pato", "zorro", "baloncesto", "hacer", "jugar");
+        $generacionPalabra = $listaPalabras[rand(0,21)];
 
         echo strtoupper($generacionPalabra);
 
-        if (!isset($palabraES)) {
+        if (!isset($_POST['Enviar'])) {
     ?>
             <form action="#" method="post">
-                Introduzca una palabra en Español: <input type="text" name="palabraES" autofocus><br>
+                Introduzca una letra o palabra: <input type="text" name="palabraUsuario" autofocus><br>
                 <input type="submit" value="Enviar">
             </form>
     <?php
         }else{
     ?>
             <form action="#" method="post">
-                Introduzca una palabra en Español: <input type="text" name="palabraES" autofocus><br>
+                Introduzca una letra o palabra: <input type="text" name="palabraUsuario" autofocus><br>
                 <input type="submit" value="Enviar">
             </form>
     <?php
             // Usamos la función in_array para buscar el valor introducido por el usuario en el array, y en caso de que esté mostrarlo por pantalla
-            if (in_array($palabraES, $palabraEnEspanol)) {
-                echo "$palabraES en inglés es $traducciones[$palabraES]<br><br>";
+            if (in_array($palabra, $palabraEnEspanol)) {
+                echo "$palabra en inglés es $listaPalabras[$palabra]<br><br>";
             } else {
                 echo "La palabra introducida no está en el diccionario.";
             }
