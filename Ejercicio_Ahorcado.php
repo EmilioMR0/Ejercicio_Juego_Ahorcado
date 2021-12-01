@@ -20,6 +20,7 @@ El programa pedirá una palabra en español y dará la correspondiente traducci�
         $listaPalabras = array ("ordenador", "nosotros", "esternocleidomastoideo", "noche", "dar", "porque", "nuevo", "camino", "bebe", "ahora", "tiempo", "cuando", "ir", "deporte", "cohete", "fuego", "rojo", "pato", "zorro", "baloncesto", "hacer", "jugar");
         $generacionPalabra = strtoupper($_POST['generacionPalabra']);
         $fallos = $_POST['fallos'];
+        $respuesta = [];
 
 
         if (!isset($_POST['Enviar'])) {
@@ -52,6 +53,20 @@ echo $generacionPalabra;
                 echo "La palabra introducida no es la correcta.";
                 // $fallos++;
                 echo "Llevas $fallos fallos.";
+            }
+
+            if(strlen($palabraUsuario) == 1){
+                for($i = 0; $i < strlen($generacionPalabra); $i++){
+                    if($generacionPalabra[$i] == $palabraUsuario){
+                        $respuesta[$i] = $palabraUsuario;
+                    }else{
+                        $respuesta[$i] = "_";
+                    }
+                }
+            }
+
+            foreach($respuesta as $valor){
+                echo $valor;
             }
         }
     ?>
