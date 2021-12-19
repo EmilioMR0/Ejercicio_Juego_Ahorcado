@@ -1,7 +1,3 @@
-<!-- Ejercicio 11. Crea un mini-diccionario español-inglés que contenga, al menos, 20 palabras (con su traducción).
-Utiliza un array asociativo para almacenar las parejas de palabras.
-El programa pedirá una palabra en español y dará la correspondiente traducción en inglés. -->
-
 <?php
 // Configuramos la salida de errores para que se muestren todos
 error_reporting(E_ALL);
@@ -32,6 +28,7 @@ ini_set('display_errors', '1');
         }
         if (!isset($_POST['Enviar'])) {
             $respuesta = [];
+            $fallos = 0;
             $generacionPalabra = $listaPalabras[rand(0,21)];
     ?>
             <form action="#" method="post">
@@ -57,18 +54,31 @@ echo $generacionPalabra;
             }
 
             // Comprobamos que el dato introducido sea una letra 
-            if(strlen($palabraUsuario) == 1){
+            //if(strlen($palabraUsuario) == 1){
                 for($i = 0; $i < strlen($generacionPalabra); $i++){
-                    if($generacionPalabra[$i] == $palabraUsuario){
+                    // Declaramos la variable respuesta asignándole el valor "_" a todas sus posiciones para ir agregándole letras posteriormente
+                    $respuesta[$i] = "_";
+
+                    /*
+                    // Si en la respuesta hay un guión bajo y además la letra coincide con la generada lo cambimos por la letra introducida por el usuario
+                    if($respuesta[$i] == "_" && $generacionPalabra[$i] == $palabraUsuario){
                         $respuesta[$i] = $palabraUsuario;
-                    }else if($respuesta[$i] == "_" || is($respuesta[$i])){
+                    // Si coincide la letra con la introducida por el usuario la guarda en la mism posición en la vriable respuesta
+                    }else if($generacionPalabra[$i] == $palabraUsuario){
                         $respuesta[$i] = $palabraUsuario;
+                    // Guardamos los guiones en las posiciones que no se hayan tocado
                     }else{
                         $respuesta[$i] = "_";
-                    }
+                    }*/
                 }
+            //}
+            $posicion = 0:
+            foreach($generacionPalabra as $valor){
+                if ($valor == $palabraUsuario){
+                    $respuesta[$posicion] = $palabraUsuario;
+                }
+                $posicion++;
             }
-
             foreach($respuesta as $valor){
                 echo $valor;
             }
