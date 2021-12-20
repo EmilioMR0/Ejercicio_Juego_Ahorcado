@@ -28,13 +28,15 @@ ini_set('display_errors', '1');
             $respuesta = $_POST['respuesta'];
         }
         if (!isset($_POST['Enviar'])) {
-            $respuesta = array();
+            $respuesta = "";
             $fallos = 0;
             $generacionPalabra = $listaPalabras[rand(0,21)];
             for($i = 0; $i < strlen($generacionPalabra); $i++){
                 // Declaramos la variable respuesta asignándole el valor "_" a todas sus posiciones para ir agregándole letras posteriormente
                 $respuesta[$i] = "_";
+                echo $respuesta[$i];
             }
+
     ?>
             <form action="#" method="post">
                 Introduzca una letra o palabra: <input type="text" name="palabraUsuario" autofocus>
@@ -48,48 +50,16 @@ ini_set('display_errors', '1');
 echo $generacionPalabra;
 
         }else{
-            // Usamos la función in_array para buscar el valor introducido por el usuario en el array, y en caso de que esté mostrarlo por pantalla
             if ($generacionPalabra == $palabraUsuario) {
                 echo "La palabra introducida es la correcta<br><br>";
                 echo "Has acertado con $fallos fallos.<br><br>";
             } else {
                 echo "La palabra introducida no es la correcta.<br><br>";
-                // $fallos++;
                 echo "Llevas $fallos fallos.<br><br>";
             }
 
-            // Comprobamos que el dato introducido sea una letra 
-            //if(strlen($palabraUsuario) == 1){
-                /*for($i = 0; $i < strlen($generacionPalabra); $i++){
-                    // Declaramos la variable respuesta asignándole el valor "_" a todas sus posiciones para ir agregándole letras posteriormente
-                    $respuesta[$i] = "_";
-
-                    /*
-                    // Si en la respuesta hay un guión bajo y además la letra coincide con la generada lo cambimos por la letra introducida por el usuario
-                    if($respuesta[$i] == "_" && $generacionPalabra[$i] == $palabraUsuario){
-                        $respuesta[$i] = $palabraUsuario;
-                    // Si coincide la letra con la introducida por el usuario la guarda en la mism posición en la vriable respuesta
-                    }else if($generacionPalabra[$i] == $palabraUsuario){
-                        $respuesta[$i] = $palabraUsuario;
-                    // Guardamos los guiones en las posiciones que no se hayan tocado
-                    }else{
-                        $respuesta[$i] = "_";
-                    }*/
-                //}
-            //}
-            /*$posicion = 0;
-            foreach($generacionPalabra as $valor){
-                if ($valor == $palabraUsuario){
-                    $respuesta[$posicion] = $palabraUsuario;
-                }
-                $posicion++;
-            }*/
-
             for ($i = 0; $i < strlen($generacionPalabra); $i++){
                 if ($generacionPalabra[$i] == $palabraUsuario){
-                    echo $palabraUsuario;
-                    echo $respuesta[$i];
-
                     $respuesta[$i] = $palabraUsuario;
                 }
             }
