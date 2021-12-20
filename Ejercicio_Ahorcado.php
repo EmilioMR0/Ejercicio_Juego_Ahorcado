@@ -25,17 +25,22 @@ ini_set('display_errors', '1');
             $palabraUsuario = strtoupper($_POST['palabraUsuario']);
             $generacionPalabra = strtoupper($_POST['generacionPalabra']);
             $fallos = $_POST['fallos'];
+            $respuesta = $_POST['respuesta'];
         }
         if (!isset($_POST['Enviar'])) {
-            $respuesta = [];
+            $respuesta = array();
             $fallos = 0;
             $generacionPalabra = $listaPalabras[rand(0,21)];
+            for($i = 0; $i < strlen($generacionPalabra); $i++){
+                // Declaramos la variable respuesta asignándole el valor "_" a todas sus posiciones para ir agregándole letras posteriormente
+                $respuesta[$i] = "_";
+            }
     ?>
             <form action="#" method="post">
-            Introduzca una letra o palabra: <input type="text" name="palabraUsuario" autofocus><br><br>
-                <input type="hidden" name="generacionPalabra" value="<?php echo $generacionPalabra ?>">
-                <input type="hidden" name="fallos" value="<?php echo $fallos ?>">
-                <input type="hidden" name="respuesta" value="<?php echo $respuesta ?>">
+                Introduzca una letra o palabra: <input type="text" name="palabraUsuario" autofocus>
+                <input type="hidden" name="generacionPalabra" value="<?php echo $generacionPalabra; ?>">
+                <input type="hidden" name="fallos" value="<?php echo ++$fallos; ?>">
+                <input type="hidden" name="respuesta" value="<?php echo $respuesta; ?>"><br><br>
                 <input type="submit" name="Enviar" value="Enviar"><br><br>
             </form>
     <?php
@@ -55,7 +60,7 @@ echo $generacionPalabra;
 
             // Comprobamos que el dato introducido sea una letra 
             //if(strlen($palabraUsuario) == 1){
-                for($i = 0; $i < strlen($generacionPalabra); $i++){
+                /*for($i = 0; $i < strlen($generacionPalabra); $i++){
                     // Declaramos la variable respuesta asignándole el valor "_" a todas sus posiciones para ir agregándole letras posteriormente
                     $respuesta[$i] = "_";
 
@@ -70,24 +75,35 @@ echo $generacionPalabra;
                     }else{
                         $respuesta[$i] = "_";
                     }*/
-                }
+                //}
             //}
-            $posicion = 0:
+            /*$posicion = 0;
             foreach($generacionPalabra as $valor){
                 if ($valor == $palabraUsuario){
                     $respuesta[$posicion] = $palabraUsuario;
                 }
                 $posicion++;
+            }*/
+
+            for ($i = 0; $i < strlen($generacionPalabra); $i++){
+                if ($generacionPalabra[$i] == $palabraUsuario){
+                    echo $palabraUsuario;
+                    echo $respuesta[$i];
+
+                    $respuesta[$i] = $palabraUsuario;
+                }
             }
-            foreach($respuesta as $valor){
-                echo $valor;
+
+            for ($i = 0; $i < strlen($respuesta); $i++){
+                echo $respuesta[$i];
             }
+            
     ?>
             <form action="#" method="post">
-                Introduzca una letra o palabra: <input type="text" name="palabraUsuario" autofocus><br><br>
-                <input type="hidden" name="generacionPalabra" value="<?php echo $generacionPalabra ?>">
-                <input type="hidden" name="fallos" value="<?php echo ++$fallos ?>">
-                <input type="hidden" name="respuesta" value="<?php echo $respuesta ?>">
+                Introduzca una letra o palabra: <input type="text" name="palabraUsuario" autofocus>
+                <input type="hidden" name="generacionPalabra" value="<?php echo $generacionPalabra; ?>">
+                <input type="hidden" name="fallos" value="<?php echo ++$fallos; ?>">
+                <input type="hidden" name="respuesta" value="<?php echo $respuesta; ?>"><br><br>
                 <input type="submit" name="Enviar" value="Enviar"><br><br>
             </form>
     <?php
